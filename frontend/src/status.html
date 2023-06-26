@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="..\assets\css\style.css">
+
+</head>
+
+<body>
+	<div class="sidebar">
+		<div class="logo">
+			<img src="..\assets\img\logo.jpeg" alt="Logo">
+		</div>
+
+        <ul>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="upload.html">Upload</a></li>
+			<li><a href="status.html">History</a></li>
+			<li><a href="about.html">About Us</a></li>
+            <li><a href="login.html" class="logout-link">Logout</a></li>
+		</ul>
+		
+        <div class="profile" onclick="window.location.href='profile.html'">
+			<img src="..\assets\img\profilee.jpeg" alt="Profile Picture">
+		</div>
+
+	</div>
+	<div class="content">
+        <h2>Status Surat</h2><br>
+
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Edit</th>
+    </tr>
+
+    <tr>
+      <td>Surat Peminjaman Seminar E</td>
+      <td class="status">Done</td>
+      <td class="tanggal">12 Mei 2023</td>
+      <td class="keterangan">Signed</td>
+      <td>
+        <img src="..\assets\img\edit.png" alt="Edit" class="edit-button">
+        <img src="..\assets\img\deleted.png" alt="Hapus" class="delete-button">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Surat Pengesahan Panitia XXX 2023</td>
+      <td class="status">Pending</td>
+      <td class="tanggal">30 April 2023</td>
+      <td class="keterangan">On processed</td>
+      <td>
+        <img src="..\assets\img\edit.png" alt="Edit" class="edit-button">
+        <img src="..\assets\img\deleted.png" alt="Hapus" class="delete-button">
+      </td>
+    </tr>
+
+    <tr>
+        <td>Surat Permohonan Sponsorship PT Semen Padang</td>
+        <td class="status">Pending</td>
+        <td class="tanggal">20 Maret 2023</td>
+        <td class="keterangan">On processed</td>
+        <td>
+          <img src="..\assets\img\edit.png" alt="Edit" class="edit-button">
+          <img src="..\assets\img\deleted.png" alt="Hapus" class="delete-button">
+        </td>
+      </tr>
+  
+      <tr>
+        <td>Surat Undangan Pemateri Perusahaan XXX</td>
+        <td class="status">Done</td>
+        <td class="tanggal">1 Maret 2023</td>
+        <td class="keterangan">Signed</td>
+        <td>
+          <img src="..\assets\img\edit.png" alt="Edit" class="edit-button">
+          <img src="..\assets\img\deleted.png" alt="Hapus" class="delete-button">
+        </td>
+      </tr>    
+ 
+  </table>               
+	</div>
+
+  <script>
+    // Menggunakan fetch API untuk permintaan GET ke backend
+    fetch('http://localhost:3000/documents')
+      .then(response => response.json())
+      .then(documents => {
+        // Menggunakan data documents untuk memperbarui tampilan HTML
+        const tableBody = documents.querySelector('#status-table tbody');
+  
+        documents.forEach(documents => {
+          const row = documents.createElement('tr');
+  
+          const titleCell = documents.createElement('td');
+          titleCell.textContent = documents.filename;
+          row.appendChild(titleCell);
+  
+          const statusCell = document.createElement('td');
+          statusCell.textContent = document.status;
+          row.appendChild(statusCell);
+  
+          const dateCell = document.createElement('td');
+          dateCell.textContent = document.date;
+          row.appendChild(dateCell);
+  
+          const descriptionCell = document.createElement('td');
+          descriptionCell.textContent = document.description;
+          row.appendChild(descriptionCell);
+  
+          const editCell = document.createElement('td');
+          const editButton = document.createElement('img');
+          editButton.src = '../assets/img/edit.png';
+          editButton.alt = 'Edit';
+          editButton.classList.add('edit-button');
+          editCell.appendChild(editButton);
+  
+          const deleteButton = document.createElement('img');
+          deleteButton.src = '../assets/img/deleted.png';
+          deleteButton.alt = 'Hapus';
+          deleteButton.classList.add('delete-button');
+          editCell.appendChild(deleteButton);
+  
+          row.appendChild(editCell);
+  
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
+  
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="D:\SISTEM INFORMASI UNAND\SI SEMESTER 4\PWEB\TAP\frontend\assets\css\style.css">
+    <link rel="stylesheet" href="D:\SISTEM INFORMASI UNAND\SI SEMESTER 4\PWEB\TAP\frontend\assets\css\template.css">
+</head>
+
+<body>
+	<div class="sidebar">
+		<div class="logo">
+			<img src="D:\SISTEM INFORMASI UNAND\SI SEMESTER 4\PWEB\TAP\frontend\assets\img\logo.jpeg" alt="Logo">
+		</div>
+
+        <ul>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="upload.html">Upload</a></li>
+			<li><a href="status.html">History</a></li>
+			<li><a href="about.html">About Us</a></li>
+            <li><a href="login.html" class="logout-link">Logout</a></li>
+		</ul>
+		
+        <div class="profile" onclick="window.location.href='profile.html'">
+			<img src="D:\SISTEM INFORMASI UNAND\SI SEMESTER 4\PWEB\TAP\frontend\assets\img\profilee.jpeg" alt="Profile Picture">
+		</div>
+	</div>
+
+	<div class="content">
+        <div class="template">
+            <h2>Template Surat</h2>
+            <div class="sender-info">
+              <p>Pengirim: <span contenteditable="true" class="editable">John Doe</span></p>
+              <p>Alamat: <span contenteditable="true" class="editable">Jl. Contoh No. 123</span></p>
+            </div>
+            <div class="recipient-info">
+              <p>Penerima: <span contenteditable="true" class="editable">Jane Smith</span></p>
+              <p>Alamat: <span contenteditable="true" class="editable">Jl. Contoh No. 456</span></p>
+            </div>
+            <div class="body">
+              <p>Isi surat:</p>
+              <div contenteditable="true" class="editable">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mattis rhoncus lorem vel tempor. Sed fringilla scelerisque ultrices. Sed varius eros sed risus scelerisque, non semper velit tempus. Vivamus nec sem eu mi dapibus scelerisque a eget odio. Mauris aliquet nunc sit amet nisi dapibus lobortis.</p>
+              </div>
+            </div>
+            <div class="signature">
+              Tanda tangan: <span contenteditable="true" class="editable">John Doe</span>
+            </div>
+        </div>
+        
+          <form action="setup.html">
+          <button onclick="saveTemplate()">Save and Set Up Template</button>
+            </form>
+    </div>
+
+          <script>
+            function saveTemplate() {
+              var template = document.querySelector('.template');
+              var editableFields = template.querySelectorAll('.editable');
+              var savedTemplate = {};
+        
+              editableFields.forEach(function(field) {
+                savedTemplate[field.getAttribute('class')] = field.innerText;
+              });
+        
+              // Simpan template ke database atau lakukan tindakan lain sesuai kebutuhan
+              console.log(savedTemplate);
+            }
+          </script>
+        </body>
+        </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" href="..\assets\css\style.css">
+    <link rel="stylesheet" href="..\assets\css\upload.css">
+</head>
+
+<body>
+	<div class="sidebar">
+		<div class="logo">
+			<img src="..\assets\img\logo.jpeg" alt="Logo">
+		</div>
+
+        <ul>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="upload.html">Upload</a></li>
+			<li><a href="status.html">History</a></li>
+			<li><a href="about.html">About Us</a></li>
+            <li><a href="login.html" class="logout-link">Logout</a></li>
+		</ul>
+		
+        <div class="profile" onclick="window.location.href='profile.html'">
+			<img src="..\assets\img\profilee.jpeg" alt="Profile Picture">
+		</div>
+
+	</div>
+
+    <div class="upload-container">
+        <h2>Upload Document</h2>
+        <form id="upload-form" enctype="multipart/form-data" action="self.html">
+          <input type="file" id="document">
+          <label for="document" class="file-label">Choose File</label>
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+      
+      <script>
+        const form = document.getElementById('upload-form');
+        const documentInput = document.getElementById('document');
+      
+        form.addEventListener('submit', (e) => {
+          e.preventDefault(); // Menghentikan pengiriman form default
+      
+          const file = documentInput.files[0];
+          const formData = new FormData();
+          formData.append('document', file);
+      
+          fetch("http://localhost:3000/profile/upload", {
+            method: 'POST',
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log(result);
+              window.location.href = "self.html";
+            })
+            .catch((error) => {
+              console.error(error);
+              alert('File harus dalam format PDF!');
+              // Tangani kesalahan saat pengunggahan
+            });
+        });
+      </script>
+      
+      
+</body>
+</html>

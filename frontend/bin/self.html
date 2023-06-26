@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Sign</title>
+    <link rel="stylesheet" href="D:\SISTEM INFORMASI UNAND\SI SEMESTER 4\PWEB\TAP\frontend\assets\css\style.css">
+
+</head>
+
+<body>
+	<div class="sidebar">
+		<div class="logo">
+			<img src="D:\SISTEM INFORMASI UNAND\SI SEMESTER 4\PWEB\TAP\frontend\assets\img\logo.jpeg" alt="Logo">
+		</div>
+
+        <ul>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="upload.html">Upload</a></li>
+			<li><a href="status.html">History</a></li>
+			<li><a href="about.html">About Us</a></li>
+            <li><a href="login.html" class="logout-link">Logout</a></li>
+		</ul>
+		
+        <div class="profile" onclick="window.location.href='profile.html'">
+			<img src="D:\SISTEM INFORMASI UNAND\SI SEMESTER 4\PWEB\TAP\frontend\assets\img\profilee.jpeg" alt="Profile Picture">
+		</div>
+
+	</div>
+	<div class="content">
+        <h1>Self Sign Document</h1>
+		<form>
+            <label for="name">Document Name:</label>
+            <input type="text" id="name" name="name"><br><br>
+    
+            <label for="signature">Signature:</label>
+            <canvas id="signature" width="400" height="200" style="border:1px solid #000000;"></canvas><br><br>
+            
+            <button type="button" onclick="clearCanvas()">Clear</button>
+            <button type="button" onclick="saveSignature()">Save and Generate Document</button>
+            
+            <textarea id="signatureData" name="signatureData" style="display: none;"></textarea>
+        </form>
+        
+        <script>
+            var canvas = document.getElementById("signature");
+            var context = canvas.getContext("2d");
+            context.strokeStyle = "#000000";
+            context.lineWidth = 3;
+            var isMouseDown = false;
+            
+            canvas.addEventListener("mousedown", function(event) {
+                isMouseDown = true;
+                context.beginPath();
+                context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+            });
+            
+            canvas.addEventListener("mousemove", function(event) {
+                if (isMouseDown) {
+                    context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+                    context.stroke();
+                    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+                }
+            });
+            
+            canvas.addEventListener("mouseup", function(event) {
+                isMouseDown = false;
+            });
+            
+            function clearCanvas() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            function saveSignature() {
+                var signatureData = canvas.toDataURL();
+                document.getElementById("signatureData").value = signatureData;
+                alert("Signature saved!");
+            }
+        </script> 
+	</div>
+</body>
+</html>

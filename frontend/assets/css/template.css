@@ -1,0 +1,29 @@
+.template {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .template h2 {
+    margin-top: 0;
+  }
+
+  .template p {
+    margin-bottom: 10px;
+  }
+
+  .template .sender-info,
+  .template .recipient-info,
+  .template .body,
+  .template .signature {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .template .editable {
+    border: none;
+    padding: 0;
+    resize: vertical;
+  }

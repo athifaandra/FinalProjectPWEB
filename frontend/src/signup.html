@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="..\assets\css\style.css">
+    <!-- <script src="D:\PEWEB\tbpweb2\tbpweb2\index.js"></script> -->
+</head>
+
+<body>
+  <div class="container">
+    <div class="login">
+        <form id="regisform" action="login.html">
+            <h1>Sign Up</h1>
+            <hr>
+            <p>Please Complete Your Identity</p><br>
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="example@gmail.com">
+
+            <label for="user">Username</label>
+            <input type="text" id="username" placeholder="Username">
+
+            <!-- <label for="nohp">Phone Number</label>
+            <input type="text" id="nohp" placeholder="Phone Number"> -->
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password">
+
+            <label for="confpass">Confirm Password</label>
+            <input type="password" id="confpass" placeholder="Confirmation Password"><br>
+
+            <button id="tombol" type="submit">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+<script>
+  document.getElementById("regisform").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var email = document.getElementById("email").value;
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      var confpass = document.getElementById("confpass").value;
+
+      if (email === "") {
+          alert("Please enter an email address.");
+          return;
+      }
+
+      if (username === "") {
+          alert("Please enter a username.");
+          return;
+      }
+
+      if (password === "") {
+          alert("Please enter a password.");
+          return;
+      }
+
+      if (password !== confpass) {
+          alert("Password and confirmation password do not match.");
+          return;
+      }
+
+      var data = {
+          email: email,
+          username: username,
+          password: password
+      };
+
+      fetch("http://localhost:3000/register", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+      })
+          .then(response => response.json())
+          .then(result => {
+              console.log(result);
+              // Lakukan tindakan sesuai dengan respons dari backend
+              window.location.href = "login.html";
+              alert("Registrasi berhasil!");
+          })
+          .catch(error => {
+              console.error("Terjadi kesalahan:", error);
+          });
+  });
+</script>
+
+
+</body>
+
+</html>
